@@ -6,7 +6,7 @@ from string import Template
 api_key = 'YOUR_API_KEY_HERE'
 requests_per_minute = 10
 sleep_time = 60.0 / requests_per_minute
-request_url = 'http://api.ap.org/v2/elections/2012-11-06?level=fipscode&format=json&officeid=p&statepostal=nj'
+request_url = 'http://api.ap.org/v2/elections/2012-11-06?level=fipscode&format=json&officeid=p&statepostal=ny'
 template_filename = 'templates/new_york_with_refresh.html'
 output_filename = 'output_phase_4.html'
 
