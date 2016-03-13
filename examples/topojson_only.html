@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Elections API Workshop</title>
+  <link rel="shortcut icon" type="image/png" href="http://www.ap.org/Content/Images/favicon.ico"/>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.4.4/datamaps.none.min.js"></script>
+  <div id="container" style="position: relative; margin: auto; width: 500px; height: 350px;"></div>
+  <script>
+  var map = new Datamap({
+    scope: 'counties',
+    element: document.getElementById('container'),
+    geographyConfig: {
+      dataUrl: 'https://raw.githubusercontent.com/mattdellavolpe/US-Counties-TopoJSON/master/20m/new_york.json',
+      highlightBorderColor: '#FFFFFF'
+    },
+    setProjection: function(element) {
+      var projection = d3.geo.equirectangular()
+        .center([-75.84, 42.50]) // longitude, latitude
+        .scale(3500)
+        .translate([element.offsetWidth/2, element.offsetHeight/2]);
+      var path = d3.geo.path().projection(projection);
+      return {
+        path: path,
+        projection: projection
+      };
+    }
+  });
+  </script>
+</body>
+</html>

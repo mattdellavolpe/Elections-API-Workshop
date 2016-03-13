@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Elections API Workshop</title>
+  <link rel="shortcut icon" type="image/png" href="http://www.ap.org/Content/Images/favicon.ico"/>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.4.4/datamaps.none.min.js"></script>
+  <div id="container" style="position: relative; margin: auto; width: 500px; height: 350px;"></div>
+     <script>
+      var map = new Datamap({
+        scope: 'counties',
+        element: document.getElementById('container'),
+        geographyConfig: {
+          dataUrl: 'https://raw.githubusercontent.com/mattdellavolpe/US-Counties-TopoJSON/master/20m/new_york.json',
+          highlightBorderColor: '#FFFFFF',
+          highlightFillColor: function (geo) {
+            return geo['fillKey'] || '#777777';
+          },
+          popupTemplate: function(geography, data) {
+            return '<div class="hoverinfo">' +
+                      '<b>County:</b> ' + geography.properties.name + '<br />' +
+                      '<b>Fipscode:</b> ' + geography.id + '<br />' +
+                      '<b>Candidate:</b> ' +  data.candidate + '<br />' +
+                      '<b>Party:</b> ' +  data.fillKey + '<br />' +
+                      '<b>Vote Count:</b> ' + data.voteCount + '<br />' +
+                      '<b>Precincts Reporting:</b> ' + data.precinctsReporting + '<br />' +
+                    '</div>';
+          }
+        },
+        setProjection: function(element) {
+          var projection = d3.geo.equirectangular()
+            .center([-75.84, 42.50]) // longitude, latitude
+            .scale(3500)
+            .translate([element.offsetWidth/2, element.offsetHeight/2]);
+          var path = d3.geo.path().projection(projection);
+          return {
+            path: path,
+            projection: projection
+          };
+        },
+        fills: {
+          defaultFill: '#777777',
+          Dem: '#00B4FF',
+          GOP: '#FF4040'
+        },
+        data: {
+  "36067": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "112,664",
+    "candidate": "Barack Obama"
+  },
+  "36073": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "8,076",
+    "candidate": "Mitt Romney"
+  },
+  "36063": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "40,862",
+    "candidate": "Barack Obama"
+  },
+  "36019": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "17,123",
+    "candidate": "Barack Obama"
+  },
+  "36091": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "48,876",
+    "candidate": "Barack Obama"
+  },
+  "36031": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "8,805",
+    "candidate": "Barack Obama"
+  },
+  "36095": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "6,379",
+    "candidate": "Mitt Romney"
+  },
+  "36085": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "67,524",
+    "candidate": "Barack Obama"
+  },
+  "36115": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "10,596",
+    "candidate": "Barack Obama"
+  },
+  "36071": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "67,709",
+    "candidate": "Barack Obama"
+  },
+  "36087": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "60,446",
+    "candidate": "Barack Obama"
+  },
+  "36035": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,811",
+    "candidate": "Mitt Romney"
+  },
+  "36051": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "13,210",
+    "candidate": "Mitt Romney"
+  },
+  "36077": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "10,975",
+    "candidate": "Barack Obama"
+  },
+  "36029": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "220,184",
+    "candidate": "Barack Obama"
+  },
+  "36081": {
+    "fillKey": "Dem",
+    "precinctsReporting": "99.52%",
+    "voteCount": "399,970",
+    "candidate": "Barack Obama"
+  },
+  "36097": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "3,942",
+    "candidate": "Mitt Romney"
+  },
+  "36105": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "13,781",
+    "candidate": "Barack Obama"
+  },
+  "36103": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "274,830",
+    "candidate": "Barack Obama"
+  },
+  "36027": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "59,885",
+    "candidate": "Barack Obama"
+  },
+  "36049": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "5,083",
+    "candidate": "Mitt Romney"
+  },
+  "36099": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "6,526",
+    "candidate": "Barack Obama"
+  },
+  "36017": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "8,933",
+    "candidate": "Mitt Romney"
+  },
+  "36021": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "14,278",
+    "candidate": "Barack Obama"
+  },
+  "36013": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "25,795",
+    "candidate": "Mitt Romney"
+  },
+  "36015": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "16,207",
+    "candidate": "Mitt Romney"
+  },
+  "36023": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,445",
+    "candidate": "Barack Obama"
+  },
+  "36055": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "178,491",
+    "candidate": "Barack Obama"
+  },
+  "36107": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "11,278",
+    "candidate": "Mitt Romney"
+  },
+  "36101": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "20,425",
+    "candidate": "Mitt Romney"
+  },
+  "36037": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "13,701",
+    "candidate": "Mitt Romney"
+  },
+  "36065": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "41,639",
+    "candidate": "Mitt Romney"
+  },
+  "36001": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "80,891",
+    "candidate": "Barack Obama"
+  },
+  "36069": {
+    "fillKey": "GOP",
+    "precinctsReporting": "97.83%",
+    "voteCount": "21,768",
+    "candidate": "Mitt Romney"
+  },
+  "36007": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "38,315",
+    "candidate": "Barack Obama"
+  },
+  "36113": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "13,112",
+    "candidate": "Barack Obama"
+  },
+  "36039": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,935",
+    "candidate": "Mitt Romney"
+  },
+  "36009": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "15,406",
+    "candidate": "Mitt Romney"
+  },
+  "36117": {
+    "fillKey": "GOP",
+    "precinctsReporting": "95.52%",
+    "voteCount": "17,704",
+    "candidate": "Mitt Romney"
+  },
+  "36109": {
+    "fillKey": "Dem",
+    "precinctsReporting": "93.15%",
+    "voteCount": "24,019",
+    "candidate": "Barack Obama"
+  },
+  "36061": {
+    "fillKey": "Dem",
+    "precinctsReporting": "97.34%",
+    "voteCount": "417,861",
+    "candidate": "Barack Obama"
+  },
+  "36047": {
+    "fillKey": "Dem",
+    "precinctsReporting": "98.28%",
+    "voteCount": "503,291",
+    "candidate": "Barack Obama"
+  },
+  "36005": {
+    "fillKey": "Dem",
+    "precinctsReporting": "99.89%",
+    "voteCount": "288,378",
+    "candidate": "Barack Obama"
+  },
+  "36033": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,065",
+    "candidate": "Barack Obama"
+  },
+  "36083": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "34,713",
+    "candidate": "Barack Obama"
+  },
+  "36057": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "8,622",
+    "candidate": "Mitt Romney"
+  },
+  "36111": {
+    "fillKey": "Dem",
+    "precinctsReporting": "98.8%",
+    "voteCount": "42,678",
+    "candidate": "Barack Obama"
+  },
+  "36041": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "1,652",
+    "candidate": "Mitt Romney"
+  },
+  "36119": {
+    "fillKey": "Dem",
+    "precinctsReporting": "80.87%",
+    "voteCount": "171,908",
+    "candidate": "Barack Obama"
+  },
+  "36043": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "299",
+    "candidate": "Mitt Romney"
+  },
+  "36011": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "14,162",
+    "candidate": "Barack Obama"
+  },
+  "36089": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "19,574",
+    "candidate": "Barack Obama"
+  },
+  "36059": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "243,649",
+    "candidate": "Barack Obama"
+  },
+  "36045": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "16,279",
+    "candidate": "Mitt Romney"
+  },
+  "36123": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "4,270",
+    "candidate": "Mitt Romney"
+  },
+  "36075": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "21,733",
+    "candidate": "Barack Obama"
+  },
+  "36025": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,085",
+    "candidate": "Mitt Romney"
+  },
+  "36003": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,609",
+    "candidate": "Mitt Romney"
+  },
+  "36053": {
+    "fillKey": "Dem",
+    "precinctsReporting": "98.18%",
+    "voteCount": "12,426",
+    "candidate": "Barack Obama"
+  },
+  "36121": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "9,726",
+    "candidate": "Mitt Romney"
+  },
+  "36093": {
+    "fillKey": "Dem",
+    "precinctsReporting": "100.0%",
+    "voteCount": "33,289",
+    "candidate": "Barack Obama"
+  },
+  "36079": {
+    "fillKey": "GOP",
+    "precinctsReporting": "100.0%",
+    "voteCount": "22,436",
+    "candidate": "Mitt Romney"
+  }
+}
+      });
+
+      map.legend();
+     </script>
+</body>
+</html>

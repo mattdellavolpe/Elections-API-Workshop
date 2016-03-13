@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Elections API Workshop</title>
+  <link rel="shortcut icon" type="image/png" href="http://www.ap.org/Content/Images/favicon.ico"/>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.4.4/datamaps.none.min.js"></script>
+  <div id="container" style="position: relative; margin: auto; width: 500px; height: 350px;"></div>
+  <script>
+  var map = new Datamap({
+    scope: 'counties',
+    element: document.getElementById('container'),
+    geographyConfig: {
+      dataUrl: 'https://raw.githubusercontent.com/mattdellavolpe/US-Counties-TopoJSON/master/5m/massachusetts.json',
+      highlightBorderColor: '#FFFFFF',
+      highlightFillColor: function (geo) {
+        return geo['fillKey'] || '#777777';
+      },
+      popupTemplate: function(geography, data) {
+        return '<div class="hoverinfo">' +
+                  '<b>County:</b> ' + geography.properties.name + '<br />' +
+                  '<b>Fipscode:</b> ' + geography.id + '<br />' +
+                  '<b>Precincts Reporting:</b> ' + data.precinctsReporting + '<br />' +
+                  (data.candidate ? '<b>Candidate:</b> ' +  data.candidate + '<br />' : '') +
+                  (data.fillKey ? '<b>Party:</b> ' +  data.fillKey + '<br />' : '') +
+                  (data.voteCount ? '<b>Vote Count:</b> ' + data.voteCount + '<br />' : '') +
+                '</div>';
+      }
+    },
+    setProjection: function(element) {
+      var projection = d3.geo.equirectangular()
+        .center([-71.81, 42.16]) // longitude, latitude
+        .scale(6250)
+        .translate([element.offsetWidth/2, element.offsetHeight/2]);
+      var path = d3.geo.path().projection(projection);
+      return {
+        path: path,
+        projection: projection
+      };
+    },
+    fills: {
+      defaultFill: '#777777',
+      Dem: '#00B4FF',
+      GOP: '#FF4040',
+      Pending: '#777777'
+    },
+    data: $data
+  });
+
+  map.legend();
+  </script>
+</body>
+</html>
