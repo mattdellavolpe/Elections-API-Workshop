@@ -32,6 +32,7 @@ John Young (jyoung@ap.org)
 Matt Della Volpe (mdellavolpe@ap.org)  
 
 ### Links
+ [AP Developer Portal](https://developer.ap.org/ap-elections-api)  
  [Elections API 2.0 Documentation](http://customersupport.ap.org/doc/eln/AP_Elections_API_Developer_Guide.pdf)  
  [Elections API Query Explorer  - Requires an API Key](https://api.ap.org/v2/elections/xplor?apikey=YOUR_API_KEY_HERE)  
  [DataMaps](http://datamaps.github.io/)  
@@ -150,8 +151,9 @@ Each phase will incrementally add a piece of functionality until we a have a scr
 
 ### Phase 1
 In this first phase, we will use the Python library [Requests](http://docs.python-requests.org/en/master/), to make an [HTTP GET](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) request to the Elections API.  
-*To install Requests, run 'pip install requests' from the command line.*    
-*We will need to add an [API key](https://en.wikipedia.org/wiki/Application_programming_interface_key) to the URL to authenticate our request.*
+*To install Requests, run '**pip install requests**' from the command line.*  
+
+*Note: We will need to add an [API key](https://en.wikipedia.org/wiki/Application_programming_interface_key) to the URL to authenticate our request.*
 
 ### Phase 2
 In this phase, we will update our script to transform the results returned from the Elections API into our own JSON which will be used in the next phase.
@@ -168,10 +170,12 @@ Our processing will have 3 steps:
 ### Phase 3
 In this phase, instead of saving the JSON to a file, we will inject the JSON into an HTML template and save the resulting HTML to a file.  
 We will use Python's built in [string templating](https://docs.python.org/3.4/library/string.html#template-strings) to replace '$data' in the HTML template with the JSON string we are already producing.  
+
 Once complete, you can preview the generated HTML by opening it with a web browser of your choice.
 
 ### Phase 4
 Since we want to update our HTML as the results are updated, we will wrap our current workflow in a [While loop](https://en.wikipedia.org/wiki/While_loop).  
 At the tail end of our loop, we will sleep long enough to keep us within our API quota limit.  
-*Note: To throttle our calls more efficiently we could use [this](https://gist.github.com/gregburek/1441055#gistcomment-1294264).*  
+*Note: To throttle our calls more efficiently we could use something along the lines of  [this](https://gist.github.com/gregburek/1441055#gistcomment-1294264).*  
+
 To avoid updating the HTML when results have not been updated since the previous iteration of the loop, we will use a conditional request when making our API calls.
